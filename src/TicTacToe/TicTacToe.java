@@ -22,8 +22,9 @@ import java.awt.event.ActionEvent;
 public class TicTacToe extends JFrame {
 
 	private JPanel contentPane;
-	private String mark;
-	
+	private String[] mark = {"",""};
+	private boolean playerTurn = false;
+	private String[] board = {"","","","","","","","",""};
 	
 
 	/**
@@ -68,7 +69,9 @@ public class TicTacToe extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn1.setEnabled(false);
-				btn1.setText(getMarkChoice());
+				board[0]=getMarkChoice();
+				btn1.setText(board[0]);
+				 
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -79,7 +82,8 @@ public class TicTacToe extends JFrame {
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn2.setEnabled(false);
-				btn2.setText(getMarkChoice());
+				board[1]=getMarkChoice();
+				btn2.setText(board[1]);
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -90,7 +94,8 @@ public class TicTacToe extends JFrame {
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn3.setEnabled(false);
-				btn3.setText(getMarkChoice());
+				board[2]=getMarkChoice();
+				btn3.setText(board[2]);
 			}
 		});
 		btn3.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -101,7 +106,8 @@ public class TicTacToe extends JFrame {
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn4.setEnabled(false);
-				btn4.setText(getMarkChoice());
+				board[3]=getMarkChoice();
+				btn4.setText(board[3]);
 			}
 		});
 		btn4.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -112,7 +118,8 @@ public class TicTacToe extends JFrame {
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn5.setEnabled(false);
-				btn5.setText(getMarkChoice());
+				board[4]=getMarkChoice();
+				btn5.setText(board[4]);
 			}
 		});
 		btn5.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -123,7 +130,8 @@ public class TicTacToe extends JFrame {
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn6.setEnabled(false);
-				btn6.setText(getMarkChoice());
+				board[5] = getMarkChoice();
+				btn6.setText(board[5]);
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -134,7 +142,8 @@ public class TicTacToe extends JFrame {
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn7.setEnabled(false);
-				btn7.setText(getMarkChoice());
+				board[6] = getMarkChoice();
+				btn7.setText(board[6]);
 			}
 		});
 		btn7.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -145,7 +154,8 @@ public class TicTacToe extends JFrame {
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn8.setEnabled(false);
-				btn8.setText(getMarkChoice());
+				board[7] = getMarkChoice();
+				btn8.setText(board[7]);
 			}
 		});
 		btn8.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -156,7 +166,8 @@ public class TicTacToe extends JFrame {
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn9.setEnabled(false);
-				btn9.setText(getMarkChoice());
+				board[8] = getMarkChoice();
+				btn9.setText(board[8]);
 			}
 		});
 		btn9.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -179,22 +190,40 @@ public class TicTacToe extends JFrame {
 	private void setMarkChoice(){
 		boolean set = false;
 		do{
-		mark = JOptionPane.showInputDialog(null, "Choose your marker: X or O ", "Marker Choice", JOptionPane.INFORMATION_MESSAGE).toUpperCase();
-		System.out.println(mark);
+		mark[0] = JOptionPane.showInputDialog(null, "Choose your marker: X or O ", "Marker Choice", JOptionPane.INFORMATION_MESSAGE).toUpperCase();
+	
 		
-		if (mark.equals("X") == true){
+		if (mark[0].equals("X") == true){
+			mark[1] = "O";
 			set = true;
-		}else if( mark.equals("O") == true){
+		}else if( mark[0].equals("O") == true){
+			mark[1] = "X";
 			set = true;
 		}else
 		{
-			JOptionPane.showMessageDialog(null, mark + " This is not a valid marker.\n Please try again", "Marker Choice Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, mark[0] + " This is not a valid marker.\n Please try again", "Marker Choice Error", JOptionPane.ERROR_MESSAGE);
 		}
 		System.out.println(set);
 		
 		} while (set == false);
 	}
-	private String getMarkChoice(){
-		return mark;
+	private void resetBoard(){
+		for(int i= 0; i < 9; i++){
+			board[i] = "";
+			
+		}
 	}
+	private String getMarkChoice(){
+		if (playerTurn == true){ 
+			playerTurn = false;
+			return mark[0];
+			
+		}else{
+			playerTurn = true;
+			return mark[1];
+		}
+		
+	}
+	
+	
 }
