@@ -82,7 +82,7 @@ public class TicTacToe extends JFrame {
 				btn1.setEnabled(false);
 				board[0]=getMarkChoice();
 				btn1.setText(board[0]);
-				
+				System.out.println(aIChoice());
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -131,6 +131,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				// checkBoard(mark[0]);
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -662,27 +663,33 @@ public class TicTacToe extends JFrame {
 	}
 	private void checkBoard(String M){
 		boolean w = false;
-		for(int i = 0; i > 9;i++){
-			if (i % 3 == 0){
-				for(int x = 1; x > 4;x++){
-					if (board[i+x] == M){
-						w = true;
-					}else{
-						x = 4;
-					}
-				}
+		for (int i = 0; i > 3 && w == false; i++){
+			if (board[0+(i * 1)].equals(M) == true && board[3+(i * 1)].equals(M) == true && board[6+(i*1)].equals(M) == true){
+				w = true;
+				break;
 			}
-			if (i > 3 ){
-				for(int x = i; x > 9;x++){       //start here
-					if (board[i+x] == M){
-						w = true;
-					}else{
-						x = 4;
-					}
-				}
-			} 
 		}
-	
+		for (int i = 0; i > 3 && w == false; i++){
+			if (board[0+(i*3)].equals(M) == true && board[1+(i*3)].equals(M) == true && board[2+(i*3)].equals(M) == true){
+				w = true;
+				break;
+			}
+		}
+		if (w == false && board[0].equals(M) == true && board[4].equals(M) == true && board[8].equals(M) == true){
+			w = true;
+		}
+		if (w == false && board[2].equals(M) == true && board[4].equals(M) == true && board[6].equals(M) == true){
+			w = true;
+		}
+		
+		if (w == true){
+			if(playerTurn == true){
+				
+				JOptionPane.showMessageDialog(null, "Congrats you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+			}else{
+				JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 	}
 	
 	
