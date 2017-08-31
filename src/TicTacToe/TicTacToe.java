@@ -82,52 +82,51 @@ public class TicTacToe extends JFrame {
 				btn1.setEnabled(false);
 				board[0]=getMarkChoice();
 				btn1.setText(board[0]);
-				System.out.println(aIChoice());
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -148,47 +147,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -208,47 +207,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -268,47 +267,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -328,47 +327,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -389,47 +388,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -449,47 +448,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -510,47 +509,47 @@ public class TicTacToe extends JFrame {
 				 case 1:
 					 btn1.setEnabled(false);
 					 btn1.setText(aIMark());
-					 playerTurn = false;
+					
 					 break;
 				 case 2:
 					 btn2.setEnabled(false);
 					 btn2.setText(aIMark());
-					 playerTurn = false;
+					
 					 break;
 				 case 3: 
 					 btn3.setEnabled(false);
 					 btn3.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 4:
 					 btn4.setEnabled(false);
 					 btn4.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 5:
 					 btn5.setEnabled(false);
 					 btn5.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 6:
 					 btn6.setEnabled(false);
 					 btn6.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 7: 
 					 btn7.setEnabled(false);
 					 btn7.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 8:
 					 btn8.setEnabled(false);
 					 btn8.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 				 case 9:
 					 btn9.setEnabled(false);
 					 btn9.setText(aIMark());
-					 playerTurn = false;
+					 
 					 break;
 					 
 				 }
@@ -614,14 +613,11 @@ public class TicTacToe extends JFrame {
 		}
 	}
 	private String getMarkChoice(){
-		if (playerTurn == true){ 
-			playerTurn = false;
+		
+			playerTurn = false;	// turn this to false
 			return mark[0];
 			
-		}else{
-			playerTurn = true;
-			return mark[1];
-		}
+		
 		
 	}
 	private int aIChoice(){
@@ -629,36 +625,41 @@ public class TicTacToe extends JFrame {
 		boolean found = false;
 		int num = 0;
 		for(int i = 0; i < 9; i++){
+			System.out.println(board[i]);
 			if (board[i].equals("") == true){
-				
+			System.out.println(board[i]);
 				found = true;
-				break;
+				i=9;
 			}
 		}
+		
 		if (found == false){
 			JOptionPane.showMessageDialog(null, "Stale Mate" );
 			
 		}else{
 			found = false;
 			
-			while(false == found){
+			while(found == false){
 				num = RandomNum();
 				if (board[num] == ""){
 					board[num] = mark[1];
+					found = true;
 				}
 			}
 		}
 		
+		playerTurn = true;
 		
-		return num;
+		return num + 1;
 		
 	}
 	private String aIMark(){
 		return mark[1];
 	}
+	
 	public int RandomNum(){
 		Random rand = new Random();
-		return (rand.nextInt(100) % 9) + 1;
+		return (rand.nextInt(100) % 8);
 		
 	}
 	private void checkBoard(String M){
