@@ -26,6 +26,16 @@ public class TicTacToe extends JFrame {
 	private String[] mark = {"",""};
 	private boolean playerTurn = false;
 	private String[] board = {"","","","","","","","",""};
+	JButton btn1 = new JButton("");
+	JButton btn2 = new JButton("");
+	JButton btn3 = new JButton("");
+	JButton btn4 = new JButton("");
+	JButton btn5 = new JButton("");
+	JButton btn6 = new JButton("");
+	JButton btn7 = new JButton("");
+	JButton btn8 = new JButton("");
+	JButton btn9 = new JButton("");
+	private final JMenuItem mntmReset = new JMenuItem("Reset");
 	
 
 	/**
@@ -49,7 +59,7 @@ public class TicTacToe extends JFrame {
 	 */
 	public TicTacToe() {
 	
-		JButton btn1 = new JButton("");
+		/*JButton btn1 = new JButton("");
 		JButton btn2 = new JButton("");
 		JButton btn3 = new JButton("");
 		JButton btn4 = new JButton("");
@@ -57,7 +67,7 @@ public class TicTacToe extends JFrame {
 		JButton btn6 = new JButton("");
 		JButton btn7 = new JButton("");
 		JButton btn8 = new JButton("");
-		JButton btn9 = new JButton("");
+		JButton btn9 = new JButton("");*/
 		setMarkChoice();
 		setTitle("TIC TAC TOE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +78,13 @@ public class TicTacToe extends JFrame {
 		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
+		mntmReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resetBoard();
+			}
+		});
+		
+		mnFile.add(mntmReset);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
@@ -82,6 +99,7 @@ public class TicTacToe extends JFrame {
 				btn1.setEnabled(false);
 				board[0]=getMarkChoice();
 				btn1.setText(board[0]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -130,7 +148,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
-				// checkBoard(mark[0]);
+				checkBoard();
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -143,6 +161,7 @@ public class TicTacToe extends JFrame {
 				btn2.setEnabled(false);
 				board[1]=getMarkChoice();
 				btn2.setText(board[1]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -191,6 +210,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				 checkBoard();
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -203,6 +223,7 @@ public class TicTacToe extends JFrame {
 				btn3.setEnabled(false);
 				board[2]=getMarkChoice();
 				btn3.setText(board[2]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -263,6 +284,7 @@ public class TicTacToe extends JFrame {
 				btn4.setEnabled(false);
 				board[3]=getMarkChoice();
 				btn4.setText(board[3]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -311,6 +333,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				 checkBoard();
 			}
 		});
 		btn4.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -323,6 +346,7 @@ public class TicTacToe extends JFrame {
 				btn5.setEnabled(false);
 				board[4]=getMarkChoice();
 				btn5.setText(board[4]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -384,6 +408,7 @@ public class TicTacToe extends JFrame {
 				btn6.setEnabled(false);
 				board[5] = getMarkChoice();
 				btn6.setText(board[5]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -432,6 +457,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				 checkBoard();
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -444,6 +470,7 @@ public class TicTacToe extends JFrame {
 				btn7.setEnabled(false);
 				board[6] = getMarkChoice();
 				btn7.setText(board[6]);
+				checkBoard();
 				 switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -492,6 +519,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				 checkBoard();
 			}
 			
 		});
@@ -505,6 +533,7 @@ public class TicTacToe extends JFrame {
 				btn8.setEnabled(false);
 				board[7] = getMarkChoice();
 				btn8.setText(board[7]);
+				checkBoard();
 				switch(aIChoice()){
 				 case 1:
 					 btn1.setEnabled(false);
@@ -553,6 +582,7 @@ public class TicTacToe extends JFrame {
 					 break;
 					 
 				 }
+				checkBoard();
 			}
 		});
 		btn8.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -565,7 +595,57 @@ public class TicTacToe extends JFrame {
 				btn9.setEnabled(false);
 				board[8] = getMarkChoice();
 				btn9.setText(board[8]);
-				aIChoice();
+				checkBoard();
+				switch(aIChoice()){
+				 case 1:
+					 btn1.setEnabled(false);
+					 btn1.setText(aIMark());
+					
+					 break;
+				 case 2:
+					 btn2.setEnabled(false);
+					 btn2.setText(aIMark());
+					
+					 break;
+				 case 3: 
+					 btn3.setEnabled(false);
+					 btn3.setText(aIMark());
+					 
+					 break;
+				 case 4:
+					 btn4.setEnabled(false);
+					 btn4.setText(aIMark());
+					 
+					 break;
+				 case 5:
+					 btn5.setEnabled(false);
+					 btn5.setText(aIMark());
+					 
+					 break;
+				 case 6:
+					 btn6.setEnabled(false);
+					 btn6.setText(aIMark());
+					 
+					 break;
+				 case 7: 
+					 btn7.setEnabled(false);
+					 btn7.setText(aIMark());
+					 
+					 break;
+				 case 8:
+					 btn8.setEnabled(false);
+					 btn8.setText(aIMark());
+					 
+					 break;
+				 case 9:
+					 btn9.setEnabled(false);
+					 btn9.setText(aIMark());
+					 
+					 break;
+					 
+				 }
+				checkBoard();
+				
 			}
 		});
 		btn9.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -611,6 +691,39 @@ public class TicTacToe extends JFrame {
 			board[i] = "";
 			
 		}
+		resetButtons();
+	}
+	public void winButtons(){
+		btn1.setEnabled(false);
+		btn2.setEnabled(false);
+		btn3.setEnabled(false);
+		btn4.setEnabled(false);
+		btn5.setEnabled(false);
+		btn6.setEnabled(false);
+		btn7.setEnabled(false);
+		btn8.setEnabled(false);
+		btn9.setEnabled(false);
+	}
+	
+	public void resetButtons(){
+		btn1.setEnabled(true);
+		btn1.setText("");
+		btn2.setEnabled(true);
+		btn2.setText("");
+		btn3.setEnabled(true);
+		btn3.setText("");
+		btn4.setEnabled(true);
+		btn4.setText("");
+		btn5.setEnabled(true);
+		btn5.setText("");
+		btn6.setEnabled(true);
+		btn6.setText("");
+		btn7.setEnabled(true);
+		btn7.setText("");
+		btn8.setEnabled(true);
+		btn8.setText("");
+		btn9.setEnabled(true);
+		btn9.setText("");
 	}
 	private String getMarkChoice(){
 		
@@ -620,6 +733,7 @@ public class TicTacToe extends JFrame {
 		
 		
 	}
+	
 	private int aIChoice(){
 		
 		boolean found = false;
@@ -662,7 +776,13 @@ public class TicTacToe extends JFrame {
 		return (rand.nextInt(100) % 8);
 		
 	}
-	private void checkBoard(String M){
+	private void checkBoard(){
+		String M  = "";
+		if (playerTurn == true){
+			M = mark[0];  
+		}else{
+			M = mark[1];
+		}
 		boolean w = false;
 		for (int i = 0; i > 3 && w == false; i++){
 			if (board[0+(i * 1)].equals(M) == true && board[3+(i * 1)].equals(M) == true && board[6+(i*1)].equals(M) == true){
@@ -684,6 +804,7 @@ public class TicTacToe extends JFrame {
 		}
 		
 		if (w == true){
+			winButtons();
 			if(playerTurn == true){
 				
 				JOptionPane.showMessageDialog(null, "Congrats you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
