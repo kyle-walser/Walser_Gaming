@@ -6,11 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import java.awt.Font;
 
@@ -24,7 +26,8 @@ public class TicTacToe extends JFrame {
 
 	private JPanel contentPane;
 	private String[] mark = {"",""};
-	private boolean playerTurn = false;
+	private boolean playerTurn = true;
+	private String[] playerName = {"",""};
 	private String[] board = {"*","*","*","*","*","*","*","*","*"};
 	JButton btn1 = new JButton("");
 	JButton btn2 = new JButton("");
@@ -36,7 +39,8 @@ public class TicTacToe extends JFrame {
 	JButton btn8 = new JButton("");
 	JButton btn9 = new JButton("");
 	private final JMenuItem mntmReset = new JMenuItem("Reset");
-	
+	boolean gameWon = false;
+	int numOfPlayers;
 
 	/**
 	 * Launch the application.
@@ -69,6 +73,7 @@ public class TicTacToe extends JFrame {
 		JButton btn8 = new JButton("");
 		JButton btn9 = new JButton("");*/
 		setMarkChoice();
+		setName();
 		setTitle("TIC TAC TOE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 299, 322);
@@ -104,7 +109,7 @@ public class TicTacToe extends JFrame {
 				
 				caseSwitch(aIChoice());
 				 
-				checkBoard();
+				
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -119,7 +124,7 @@ public class TicTacToe extends JFrame {
 				btn2.setText(board[1]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				 checkBoard();
+				
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -134,7 +139,7 @@ public class TicTacToe extends JFrame {
 				btn3.setText(board[2]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 			}
 		});
 		btn3.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -149,7 +154,7 @@ public class TicTacToe extends JFrame {
 				btn4.setText(board[3]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				 checkBoard();
+				
 			}
 		});
 		btn4.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -164,7 +169,7 @@ public class TicTacToe extends JFrame {
 				btn5.setText(board[4]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 			}
 		});
 		btn5.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -179,7 +184,7 @@ public class TicTacToe extends JFrame {
 				btn6.setText(board[5]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -194,7 +199,7 @@ public class TicTacToe extends JFrame {
 				btn7.setText(board[6]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 			}
 			
 		});
@@ -210,7 +215,7 @@ public class TicTacToe extends JFrame {
 				btn8.setText(board[7]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 			}
 		});
 		btn8.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -225,7 +230,7 @@ public class TicTacToe extends JFrame {
 				btn9.setText(board[8]);
 				checkBoard();
 				caseSwitch(aIChoice());
-				checkBoard();
+				
 				
 			}
 		});
@@ -304,10 +309,11 @@ public class TicTacToe extends JFrame {
 		btn8.setText("");
 		btn9.setEnabled(true);
 		btn9.setText("");
+		gameWon = false;
 	}
 	private String getMarkChoice(){
 		
-			playerTurn = false;	// turn this to false
+			
 			return mark[0];
 			
 		
@@ -340,7 +346,7 @@ public class TicTacToe extends JFrame {
 			}
 		}
 		
-		playerTurn = true;
+		
 		
 		return num + 1;
 		
@@ -370,7 +376,6 @@ public class TicTacToe extends JFrame {
 			}
 		}
 		for (int i = 0; i < 3 && w == false; i++){
-		System.out.println(board[0+(i*3)] +" "+ board[1+(i*3)] +" "+ board[2+(i*3)]);
 			if (board[0+(i*3)] == M && board[1+(i*3)] == M && board[2+(i*3)] == M){
 				w = true;
 				break;
@@ -381,69 +386,125 @@ public class TicTacToe extends JFrame {
 		}
 		if (w == false && board[2].equals(M) == true && board[4].equals(M) == true && board[6].equals(M) == true){
 			w = true;
+			
 		}
 		
 		if (w == true){
+			gameWon = true;
 			winButtons();
 			if(playerTurn == true){
 				
-				JOptionPane.showMessageDialog(null, "Congrats you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Congrats "+ playerName[0] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
 			}else{
-				JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
+				if (numOfPlayers == 1){
+					JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null,  "Congrats "+ playerName[1] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		if (gameWon == false){
+			if (playerTurn == false){
+				playerTurn = true;
+			}else{
+				playerTurn = false;
+				// turn this to false
 			}
 		}
 	}
 	
 	public void caseSwitch(int num){
-		 switch(num){
+		if (gameWon == false){
+			 switch(num){
+			 case 1:
+				 
+				 btn1.setEnabled(false);
+				 btn1.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+				 
+			 case 2:
+				 btn2.setEnabled(false);
+				 btn2.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 3: 
+				 btn3.setEnabled(false);
+				 btn3.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 4:
+				 btn4.setEnabled(false);
+				 btn4.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 5:
+				 btn5.setEnabled(false);
+				 btn5.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 6:
+				 btn6.setEnabled(false);
+				 btn6.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 7: 
+				 btn7.setEnabled(false);
+				 btn7.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 8:
+				 btn8.setEnabled(false);
+				 btn8.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+			 case 9:
+				 btn9.setEnabled(false);
+				 btn9.setText(aIMark());
+				 board[num - 1] = aIMark();
+				 break;
+				 
+			 }
+			 checkBoard();
+		}
+	}
+	public void setName(){
+		while(playerName[0].length()<1){
+			playerName[0] = JOptionPane.showInputDialog(null,"Please enter your name","");
+			if (playerName[0].length()<1){
+				JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		 Object[] options1 = { "1", "2"};
+
+		 JPanel panel = new JPanel();
+		 panel.add(new JLabel("Please select how many players"));
+		// JTextField textField = new JTextField(10);
+		// panel.add(textField);
+		
+		 switch( JOptionPane.showOptionDialog(null, panel, "Number of Players",
+		         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,
+		         null, options1, null)){
+		 
+		 case 0:
+			 playerName[1] = "Computer";
+			 numOfPlayers = 1;
+			 break;
 		 case 1:
+			 numOfPlayers = 2;
+			 while(playerName[1].length()<1){
+				 playerName[1] = JOptionPane.showInputDialog(null,"Please Enter Second Player's Name","");
+					if (playerName[1].length()<1){
+						JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			 
-			 btn1.setEnabled(false);
-			 btn1.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-			 
-		 case 2:
-			 btn2.setEnabled(false);
-			 btn2.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 3: 
-			 btn3.setEnabled(false);
-			 btn3.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 4:
-			 btn4.setEnabled(false);
-			 btn4.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 5:
-			 btn5.setEnabled(false);
-			 btn5.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 6:
-			 btn6.setEnabled(false);
-			 btn6.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 7: 
-			 btn7.setEnabled(false);
-			 btn7.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 8:
-			 btn8.setEnabled(false);
-			 btn8.setText(aIMark());
-			 board[num - 1] = aIMark();
-			 break;
-		 case 9:
-			 btn9.setEnabled(false);
-			 btn9.setText(aIMark());
-			 board[num - 1] = aIMark();
 			 break;
 			 
-		 }
+		 	 }
+		 
+		// if (result == JOptionPane.YES_OPTION){
+		 //    JOptionPane.showMessageDialog(null, textField.getText());
+		// }
 	}
 }
