@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 import java.util.Vector;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TicTacToe extends JFrame {
 
@@ -46,6 +48,7 @@ public class TicTacToe extends JFrame {
 	private final JMenu mnEdit = new JMenu("Edit");
 	private final JMenuItem mntmOfPlayers = new JMenuItem("# of Players");
 	
+		
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +69,7 @@ public class TicTacToe extends JFrame {
 	 * Create the frame.
 	 */
 	public TicTacToe() {
+		
 	
 		setNumOfPlayers();
 		setName(); 
@@ -131,6 +135,9 @@ public class TicTacToe extends JFrame {
 		
 		mnChange.add(mntmOfPlayers);
 		contentPane = new JPanel();
+		
+		
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
