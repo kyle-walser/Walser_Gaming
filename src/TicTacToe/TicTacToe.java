@@ -21,6 +21,7 @@ import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Random;
+import java.util.Vector;
 
 public class TicTacToe extends JFrame {
 
@@ -28,7 +29,7 @@ public class TicTacToe extends JFrame {
 	private String[] mark = {"",""};
 	private boolean playerTurn = true;
 	private String[] playerName = {"",""};
-	private String[] board = {"*","*","*","*","*","*","*","*","*"};
+	private String[] board = {"*","*","*","*","*","*","*","*","*","*"};
 	JButton btn1 = new JButton("");
 	JButton btn2 = new JButton("");
 	JButton btn3 = new JButton("");
@@ -41,7 +42,10 @@ public class TicTacToe extends JFrame {
 	private final JMenuItem mntmReset = new JMenuItem("Reset");
 	boolean gameWon = false;
 	int numOfPlayers;
-
+	Vector<Integer> v = new Vector<Integer>();
+	private final JMenu mnEdit = new JMenu("Edit");
+	private final JMenuItem mntmOfPlayers = new JMenuItem("# of Players");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,22 +67,16 @@ public class TicTacToe extends JFrame {
 	 */
 	public TicTacToe() {
 	
-		/*JButton btn1 = new JButton("");
-		JButton btn2 = new JButton("");
-		JButton btn3 = new JButton("");
-		JButton btn4 = new JButton("");
-		JButton btn5 = new JButton("");
-		JButton btn6 = new JButton("");
-		JButton btn7 = new JButton("");
-		JButton btn8 = new JButton("");
-		JButton btn9 = new JButton("");*/
+		setNumOfPlayers();
+		setName(); 
 		setMarkChoice();
-		setName();
+		
 		setTitle("TIC TAC TOE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 299, 322);
 		
 		JMenuBar menuBar = new JMenuBar();
+		
 		setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
@@ -86,6 +84,12 @@ public class TicTacToe extends JFrame {
 		mntmReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetBoard();
+				if(getNumOfPlayers() == 0){
+					if (RandomNum(2) + 1 == 2){
+						playerTurn = false;
+						caseSwitch(RandomNum(9));
+					}
+				}
 			}
 		});
 		
@@ -93,6 +97,39 @@ public class TicTacToe extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
+		
+		menuBar.add(mnEdit);
+		
+		JMenu mnChange = new JMenu("Change");
+		mnEdit.add(mnChange);
+		
+		JMenuItem mntmName = new JMenuItem("Name");
+		mntmName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				setName();
+				resetBoard();
+			}
+		});
+		mnChange.add(mntmName);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Marker");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setMarkChoice(); 
+				resetBoard();
+			}
+		});
+		mnChange.add(mntmNewMenuItem_1);
+		mntmOfPlayers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setNumOfPlayers();
+				setName();
+				resetBoard();
+			}
+		});
+		
+		mnChange.add(mntmOfPlayers);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -101,15 +138,10 @@ public class TicTacToe extends JFrame {
 		
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn1.setEnabled(false);
-				
-				board[0]=getMarkChoice();
-				btn1.setText(board[0]);
-				checkBoard();
-				
-				caseSwitch(aIChoice());
-				 
-				
+				caseSwitch(1);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+				}
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -119,11 +151,11 @@ public class TicTacToe extends JFrame {
 		
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn2.setEnabled(false);
-				board[1]=getMarkChoice();
-				btn2.setText(board[1]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(2);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 		});
@@ -134,11 +166,12 @@ public class TicTacToe extends JFrame {
 	
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn3.setEnabled(false);
-				board[2]=getMarkChoice();
-				btn3.setText(board[2]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(3);
+	
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 		});
@@ -149,11 +182,11 @@ public class TicTacToe extends JFrame {
 		
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn4.setEnabled(false);
-				board[3]=getMarkChoice();
-				btn4.setText(board[3]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(4);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 		});
@@ -164,11 +197,10 @@ public class TicTacToe extends JFrame {
 	
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn5.setEnabled(false);
-				board[4]=getMarkChoice();
-				btn5.setText(board[4]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(5);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+				}
 				
 			}
 		});
@@ -179,11 +211,11 @@ public class TicTacToe extends JFrame {
 		
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn6.setEnabled(false);
-				board[5] = getMarkChoice();
-				btn6.setText(board[5]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(6);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 		});
@@ -194,11 +226,11 @@ public class TicTacToe extends JFrame {
 	
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn7.setEnabled(false);
-				board[6] = getMarkChoice();
-				btn7.setText(board[6]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(7);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 			
@@ -210,11 +242,11 @@ public class TicTacToe extends JFrame {
 		
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn8.setEnabled(false);
-				board[7] = getMarkChoice();
-				btn8.setText(board[7]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(8);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
 				
 			}
 		});
@@ -225,11 +257,12 @@ public class TicTacToe extends JFrame {
 	
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btn9.setEnabled(false);
-				board[8] = getMarkChoice();
-				btn9.setText(board[8]);
-				checkBoard();
-				caseSwitch(aIChoice());
+				caseSwitch(9);
+				if (getNumOfPlayers() == 0 && gameWon == false){
+					caseSwitch(aIChoice());
+					
+				}
+				
 				
 				
 			}
@@ -250,6 +283,12 @@ public class TicTacToe extends JFrame {
 		});
 		btnExit.setBounds(182, 228, 89, 23);
 		contentPane.add(btnExit);
+		if(getNumOfPlayers() == 0){
+			if (RandomNum(2) + 1 == 2){
+				playerTurn = false;
+				caseSwitch(RandomNum(9));
+			}
+		}
 	}
 	private void setMarkChoice(){
 		boolean set = false;
@@ -273,10 +312,12 @@ public class TicTacToe extends JFrame {
 		} while (set == false);
 	}
 	private void resetBoard(){
-		for(int i= 0; i < 9; i++){
+		for(int i= 1; i < 10; i++){
 			board[i] = "*";
 			
 		}
+		playerTurn = true;
+		
 		resetButtons();
 	}
 	public void winButtons(){
@@ -321,43 +362,47 @@ public class TicTacToe extends JFrame {
 	}	
 	private int aIChoice(){
 		
-		boolean found = false;
+	 
 		int num = 0;
-		for(int i = 0; i < 9 && found == false; i++){
+		v.clear();
+		for(int i = 1; i < 10; i++){
 			if (board[i].equals("*") == true){
 			
-				found = true;
-				i=9;
+				
+				v.addElement(i);
 			}
 		}
 		
-		if (found == false){
+		
+		if (v.size()  < 1){
 			JOptionPane.showMessageDialog(null, "Stale Mate" );
+			return 0;
 			
 		}else{
-			found = false;
 			
-			while(found == false){
-				num = RandomNum();
+			
+			/*while(found == false){
+				num = RandomNum(v.size());
 				if (board[num] == "*"){
 					board[num] = mark[1];
 					found = true;
 				}
-			}
+			}*/
+			return v.elementAt(RandomNum(v.size()));
+			 
 		}
 		
 		
 		
-		return num + 1;
+		
 		
 	}
 	private String aIMark(){
 		return mark[1];
 	}
-	
-	public int RandomNum(){
+	public int RandomNum(int num){
 		Random rand = new Random();
-		return (rand.nextInt(100) % 8);
+		return (rand.nextInt(100) % num);
 		
 	}
 	private void checkBoard(){
@@ -369,22 +414,22 @@ public class TicTacToe extends JFrame {
 		}
 		boolean w = false;
 		
-		for (int i = 0; i < 3 && w == false; i++){// this checks vertically if player had won.
-				if (board[0+(i * 1)] == M && board[3+(i * 1)] == M && board[6+(i*1)] == M){
+		for (int i = 0; i < 3 && w == false; i++){// this checks vertically if player has won
+				if (board[1+(i * 1)] == M && board[4+(i * 1)] == M && board[7+(i*1)] == M){
+				w = true;
+				break;
+			}						
+		}
+		for (int i = 0; i < 3 && w == false; i++){ // this checks horizontally if player has won
+			if (board[1+(i*3)] == M && board[2+(i*3)] == M && board[3+(i*3)] == M){
 				w = true;
 				break;
 			}
 		}
-		for (int i = 0; i < 3 && w == false; i++){
-			if (board[0+(i*3)] == M && board[1+(i*3)] == M && board[2+(i*3)] == M){
-				w = true;
-				break;
-			}
-		}
-		if (w == false && board[0].equals(M) == true && board[4].equals(M) == true && board[8].equals(M) == true){
+		if (w == false && board[1].equals(M) == true && board[5].equals(M) == true && board[9].equals(M) == true){
 			w = true;
 		}
-		if (w == false && board[2].equals(M) == true && board[4].equals(M) == true && board[6].equals(M) == true){
+		if (w == false && board[3].equals(M) == true && board[5].equals(M) == true && board[7].equals(M) == true){
 			w = true;
 			
 		}
@@ -396,7 +441,7 @@ public class TicTacToe extends JFrame {
 				
 				JOptionPane.showMessageDialog(null, "Congrats "+ playerName[0] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
 			}else{
-				if (numOfPlayers == 1){
+				if (numOfPlayers == 0){
 					JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					JOptionPane.showMessageDialog(null,  "Congrats "+ playerName[1] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
@@ -408,103 +453,143 @@ public class TicTacToe extends JFrame {
 				playerTurn = true;
 			}else{
 				playerTurn = false;
-				// turn this to false
 			}
 		}
 	}
 	
 	public void caseSwitch(int num){
 		if (gameWon == false){
+			String mark;
+			
+			if (playerTurn == true){
+				mark= getMarkChoice();
+			}else{
+				mark = aIMark();
+			}
+			
+			
+			
 			 switch(num){
 			 case 1:
 				 
 				 btn1.setEnabled(false);
-				 btn1.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn1.setText(mark);
+				 board[num] = mark;
 				 break;
 				 
 			 case 2:
 				 btn2.setEnabled(false);
-				 btn2.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn2.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 3: 
 				 btn3.setEnabled(false);
-				 btn3.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn3.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 4:
 				 btn4.setEnabled(false);
-				 btn4.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn4.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 5:
 				 btn5.setEnabled(false);
-				 btn5.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn5.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 6:
 				 btn6.setEnabled(false);
-				 btn6.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn6.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 7: 
 				 btn7.setEnabled(false);
-				 btn7.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn7.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 8:
 				 btn8.setEnabled(false);
-				 btn8.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn8.setText(mark);
+				 board[num] = mark;
 				 break;
 			 case 9:
 				 btn9.setEnabled(false);
-				 btn9.setText(aIMark());
-				 board[num - 1] = aIMark();
+				 btn9.setText(mark);
+				 board[num] = mark;
 				 break;
 				 
 			 }
+			 
 			 checkBoard();
+			
+			
+		
 		}
 	}
 	public void setName(){
 		while(playerName[0].length()<1){
-			playerName[0] = JOptionPane.showInputDialog(null,"Please enter your name","");
+			playerName[0] = JOptionPane.showInputDialog(null,"Please enter your name","").toUpperCase();
 			if (playerName[0].length()<1){
 				JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
 			}
-		}
-		 Object[] options1 = { "1", "2"};
-
-		 JPanel panel = new JPanel();
-		 panel.add(new JLabel("Please select how many players"));
-		// JTextField textField = new JTextField(10);
-		// panel.add(textField);
-		
-		 switch( JOptionPane.showOptionDialog(null, panel, "Number of Players",
-		         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,
-		         null, options1, null)){
+		 }
+		 
+		 switch(getNumOfPlayers()){
 		 
 		 case 0:
-			 playerName[1] = "Computer";
-			 numOfPlayers = 1;
+			 setName2("Computer");
+			 
 			 break;
 		 case 1:
-			 numOfPlayers = 2;
-			 while(playerName[1].length()<1){
-				 playerName[1] = JOptionPane.showInputDialog(null,"Please Enter Second Player's Name","");
-					if (playerName[1].length()<1){
-						JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
-					}
-				}
+			 
+			 setPlayerSecondName();
 			 
 			 break;
 			 
 		 	 }
 		 
-		// if (result == JOptionPane.YES_OPTION){
-		 //    JOptionPane.showMessageDialog(null, textField.getText());
-		// }
+		
 	}
+	private void setNumOfPlayers(){
+		Object[] options1 = { "1", "2"};
+
+		 JPanel panel = new JPanel();
+		 panel.add(new JLabel("Please select how many players"));
+		
+		 numOfPlayers =  JOptionPane.showOptionDialog(null, panel, "Number of Players",
+		         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null, options1, null);
+		 
+		 
+		 
+		
+	}
+	private void setPlayerSecondName()
+	{
+		
+	/*	while(playerName[1].length()<1){
+			 playerName[1] = JOptionPane.showInputDialog(null,"Please Enter Second Player's Name","").toUpperCase();
+				if (playerName[1].length()<1){
+					JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
+				}
+			}*/
+			
+		do{
+			setName2(JOptionPane.showInputDialog(null,"Please Enter Second Player's Name",""));
+			
+			if (getName2().length() < 1){
+				JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
+			}
+		}while(getName2().length()<1);
+	}
+	private int getNumOfPlayers(){
+		return numOfPlayers;
+	}
+	
+	private void setName2(String in){
+		playerName[1] = in.toUpperCase();
+	}
+	private String getName2(){
+		return playerName[1];
+	}
+	
 }
