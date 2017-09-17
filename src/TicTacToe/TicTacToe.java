@@ -24,6 +24,14 @@ import java.util.Random;
 import java.util.Vector;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
 
 public class TicTacToe extends JFrame {
 
@@ -47,6 +55,21 @@ public class TicTacToe extends JFrame {
 	Vector<Integer> v = new Vector<Integer>();
 	private final JMenu mnEdit = new JMenu("Edit");
 	private final JMenuItem mntmOfPlayers = new JMenuItem("# of Players");
+	JLabel lblPlayerTurn = new JLabel("Player Turn: ");
+	private final JMenu mnReports = new JMenu("Reports");
+	private final JMenu mnStats = new JMenu("Stats");
+	private final JMenuItem mntmWins = new JMenuItem("Wins");
+	private final JMenuItem mntmLoses = new JMenuItem("Loses");
+	private final JMenuItem mntmTies = new JMenuItem("Ties");
+	private final JMenu mnRatios = new JMenu("Ratios");
+	private final JMenuItem mntmResetStats = new JMenuItem("Reset Stats");
+	private final JMenu mnWVsL = new JMenu("W vs. L");
+	private final JMenu mnComplete = new JMenu("Complete");
+	private final JMenuItem mntmWinsRatio = new JMenuItem("Wins");
+	private final JMenuItem mntmLostRatio = new JMenuItem("Lost");
+	private final JMenuItem mntmWinsComplete = new JMenuItem("Wins");
+	private final JMenuItem mntmLose = new JMenuItem("Lost");
+	private final JMenuItem mntmStaleMate = new JMenuItem("Stale Mate");
 	
 		
 	/**
@@ -75,6 +98,7 @@ public class TicTacToe extends JFrame {
 		setName(); 
 		setMarkChoice();
 		
+		getTurn();
 		setTitle("TIC TAC TOE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 299, 322);
@@ -98,6 +122,8 @@ public class TicTacToe extends JFrame {
 		});
 		
 		mnFile.add(mntmReset);
+		
+		mnFile.add(mntmResetStats);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
@@ -134,6 +160,63 @@ public class TicTacToe extends JFrame {
 		});
 		
 		mnChange.add(mntmOfPlayers);
+		
+		menuBar.add(mnReports);
+		
+		mnReports.add(mnStats);
+		mntmWins.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,numOfStats(0) );
+			}
+		});
+		
+		mnStats.add(mntmWins);
+		
+		mnStats.add(mntmLoses);
+		
+		mnStats.add(mntmTies);
+		
+		mnReports.add(mnRatios);
+		
+		mnRatios.add(mnWVsL);
+		mntmWinsRatio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(winLoseRatio(0));
+				
+			}
+		});
+		
+		mnWVsL.add(mntmWinsRatio);
+		mntmLostRatio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(winLoseRatio(1));
+			}
+		});
+		
+		mnWVsL.add(mntmLostRatio);
+		
+		mnRatios.add(mnComplete);
+		mntmWinsComplete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(completeRatio(0));
+			}
+		});
+		
+		mnComplete.add(mntmWinsComplete);
+		mntmLose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(completeRatio(1));
+			}
+		});
+		
+		mnComplete.add(mntmLose);
+		mntmStaleMate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(completeRatio(2));
+			}
+		});
+		
+		mnComplete.add(mntmStaleMate);
 		contentPane = new JPanel();
 		
 		
@@ -290,6 +373,10 @@ public class TicTacToe extends JFrame {
 		});
 		btnExit.setBounds(182, 228, 89, 23);
 		contentPane.add(btnExit);
+		
+		
+		lblPlayerTurn.setBounds(10, 232, 162, 14);
+		contentPane.add(lblPlayerTurn);
 		if(getNumOfPlayers() == 0){
 			if (RandomNum(2) + 1 == 2){
 				playerTurn = false;
@@ -317,6 +404,9 @@ public class TicTacToe extends JFrame {
 	
 		
 		} while (set == false);
+	}
+	private void Opt(String in){
+		JOptionPane.showMessageDialog(null, in, "Stat Numbers", JOptionPane.INFORMATION_MESSAGE);
 	}
 	private void resetBoard(){
 		for(int i= 1; i < 10; i++){
@@ -370,7 +460,7 @@ public class TicTacToe extends JFrame {
 	private int aIChoice(){
 		
 	 
-		int num = 0;
+		
 		v.clear();
 		for(int i = 1; i < 10; i++){
 			if (board[i].equals("*") == true){
@@ -382,7 +472,8 @@ public class TicTacToe extends JFrame {
 		
 		
 		if (v.size()  < 1){
-			JOptionPane.showMessageDialog(null, "Stale Mate" );
+			
+			
 			return 0;
 			
 		}else{
@@ -420,47 +511,72 @@ public class TicTacToe extends JFrame {
 			M = mark[1];
 		}
 		boolean w = false;
+		int in = 2;
 		
-		for (int i = 0; i < 3 && w == false; i++){// this checks vertically if player has won
-				if (board[1+(i * 1)] == M && board[4+(i * 1)] == M && board[7+(i*1)] == M){
-				w = true;
-				break;
-			}						
-		}
-		for (int i = 0; i < 3 && w == false; i++){ // this checks horizontally if player has won
-			if (board[1+(i*3)] == M && board[2+(i*3)] == M && board[3+(i*3)] == M){
-				w = true;
-				break;
+		
+		v.clear();
+		for(int i = 1; i < 10; i++){
+			if (board[i].equals("*") == true){
+			
+				
+				v.addElement(i);
 			}
 		}
-		if (w == false && board[1].equals(M) == true && board[5].equals(M) == true && board[9].equals(M) == true){
-			w = true;
+		if (v.size() == 0){
+			in = 1;
 		}
-		if (w == false && board[3].equals(M) == true && board[5].equals(M) == true && board[7].equals(M) == true){
-			w = true;
+		switch(in){
+		case 1:
+			JOptionPane.showMessageDialog(null, "Stale Mate" );
+			saveStats(3);
+			break;
+		case 2:
 			
-		}
-		
-		if (w == true){
-			gameWon = true;
-			winButtons();
-			if(playerTurn == true){
-				
-				JOptionPane.showMessageDialog(null, "Congrats "+ playerName[0] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
-			}else{
-				if (numOfPlayers == 0){
-					JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
-				}else{
-					JOptionPane.showMessageDialog(null,  "Congrats "+ playerName[1] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+			for (int i = 0; i < 3 && w == false; i++){// this checks vertically if player has won
+					if (board[1+(i * 1)] == M && board[4+(i * 1)] == M && board[7+(i*1)] == M){
+					w = true;
+					break;
+				}						
+			}
+			for (int i = 0; i < 3 && w == false; i++){ // this checks horizontally if player has won
+				if (board[1+(i*3)] == M && board[2+(i*3)] == M && board[3+(i*3)] == M){
+					w = true;
+					break;
 				}
 			}
-		}
-		if (gameWon == false){
-			if (playerTurn == false){
-				playerTurn = true;
-			}else{
-				playerTurn = false;
+			if (w == false && board[1].equals(M) == true && board[5].equals(M) == true && board[9].equals(M) == true){
+				w = true;
 			}
+			if (w == false && board[3].equals(M) == true && board[5].equals(M) == true && board[7].equals(M) == true){
+				w = true;
+				
+			}
+			
+			if (w == true){
+				gameWon = true;
+				winButtons();
+				if(playerTurn == true){
+					
+					JOptionPane.showMessageDialog(null, "Congrats "+ playerName[0] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+					saveStats(1);
+				}else{
+					
+					if (numOfPlayers == 0){
+						JOptionPane.showMessageDialog(null, "Sorry, you lost", "Lost", JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						JOptionPane.showMessageDialog(null,  "Congrats "+ playerName[1] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
+					}
+					saveStats(2);
+				}
+			}
+			if (gameWon == false){	
+				if (playerTurn == false){
+					playerTurn = true;
+				}else{
+					playerTurn = false;
+				}
+			}
+			break;
 		}
 	}
 	
@@ -532,7 +648,17 @@ public class TicTacToe extends JFrame {
 			
 		
 		}
+		getTurn();
 	}
+	private void getTurn(){
+		if (playerTurn == true)
+		{
+			lblPlayerTurn.setText("Player turn: " + getName1());
+		}else{
+			lblPlayerTurn.setText("Player turn: " + getName2());
+		}
+	}
+	
 	public void setName(){
 		while(playerName[0].length()<1){
 			playerName[0] = JOptionPane.showInputDialog(null,"Please enter your name","").toUpperCase();
@@ -573,13 +699,6 @@ public class TicTacToe extends JFrame {
 	private void setPlayerSecondName()
 	{
 		
-	/*	while(playerName[1].length()<1){
-			 playerName[1] = JOptionPane.showInputDialog(null,"Please Enter Second Player's Name","").toUpperCase();
-				if (playerName[1].length()<1){
-					JOptionPane.showMessageDialog(null, "Please a name", "No Name error", JOptionPane.ERROR_MESSAGE);
-				}
-			}*/
-			
 		do{
 			setName2(JOptionPane.showInputDialog(null,"Please Enter Second Player's Name",""));
 			
@@ -598,5 +717,92 @@ public class TicTacToe extends JFrame {
 	private String getName2(){
 		return playerName[1];
 	}
-	
+	private String getName1(){
+		return playerName[0];
+	}
+	private void saveStats(int WoL) {
+		String[] stats = {"","",""};
+		stats = getStatString(3).split(",");
+		
+		
+		switch(WoL){
+		case 1:
+			stats[0] = convert(stats[0]);
+
+		case 2:
+			stats[1] = convert(stats[1]);
+			
+		case 3:
+			stats[2] = convert(stats[2]);
+		}
+		
+		
+		SaveStatString(stats[0] + "," + stats[1] + "," +stats[2]);
+		
+	}
+	private void SaveStatString(String in){
+		FileWriter fout = null;
+		try {
+			fout = new FileWriter(fileOut());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PrintWriter writer = new PrintWriter(fout);
+		writer.write(in);
+		writer.close();
+	}
+	private String getStatString(int in){
+		String[] s = {"" ,"",""};
+		String st  = "";
+		FileReader fin = null;
+		
+		
+		try {
+			fin = new FileReader(fileOut());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "File Not found");
+		}
+		
+		BufferedReader read = new BufferedReader(fin);
+		
+			 try {
+				st = read.readLine();
+				s = st.split(",");
+				fin.close();
+				read.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			 switch(in){
+			 case 3:
+				 return st;
+			 default:
+				 return s[in];
+			 }
+		
+
+		
+	}
+	private String convert(String in){
+		return Integer.toString( Integer.parseInt( in ) + 1);
+	}
+	private String fileOut(){
+		return "ttt_stats.txt";
+	}
+	private String numOfStats(int in){
+		String[] say = {"Your current number of total wins are: ","Your current number of total loses are: ","Your current number of total stale mates are: "};
+		return  say[in]+ getStatString(in);
+	}
+	private String completeRatio(int in){
+		String[] say = {"Your Win ratio is: ","Your lose ratio is: ","Your Stale Mate ratio is: "}; 
+		return say[in] + new BigDecimal((Double.parseDouble(getStatString(in)) / (Integer.parseInt(getStatString(0)) + Integer.parseInt(getStatString(1))+ Integer.parseInt(getStatString(2)))) * 100).setScale(2, BigDecimal.ROUND_HALF_UP) + "%";
+	}
+	private String winLoseRatio(int in){
+		String[] say = {"Your Win ratio is: ","Your lose ratio is: ","Your Stale Mate ratio is: "}; 
+		return say[in] + new BigDecimal((Double.parseDouble(getStatString(in)) / (Integer.parseInt(getStatString(0)) + Integer.parseInt(getStatString(1)))) * 100).setScale(2, BigDecimal.ROUND_HALF_UP) + "%";
+	}
 }
