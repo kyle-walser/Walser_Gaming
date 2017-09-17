@@ -122,6 +122,11 @@ public class TicTacToe extends JFrame {
 		});
 		
 		mnFile.add(mntmReset);
+		mntmResetStats.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resetStats();
+			}
+		});
 		
 		mnFile.add(mntmResetStats);
 		
@@ -166,13 +171,23 @@ public class TicTacToe extends JFrame {
 		mnReports.add(mnStats);
 		mntmWins.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,numOfStats(0) );
+				Opt(numOfStats(0));
 			}
 		});
 		
 		mnStats.add(mntmWins);
+		mntmLoses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(numOfStats(1));
+			}
+		});
 		
 		mnStats.add(mntmLoses);
+		mntmTies.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Opt(numOfStats(2));
+			}
+		});
 		
 		mnStats.add(mntmTies);
 		
@@ -450,50 +465,20 @@ public class TicTacToe extends JFrame {
 		gameWon = false;
 	}
 	private String getMarkChoice(){
-		
-			
 			return mark[0];
-			
-		
-		
 	}	
 	private int aIChoice(){
-		
-	 
-		
 		v.clear();
 		for(int i = 1; i < 10; i++){
-			if (board[i].equals("*") == true){
-			
-				
+			if (board[i].equals("*") == true){		
 				v.addElement(i);
 			}
 		}
-		
-		
 		if (v.size()  < 1){
-			
-			
 			return 0;
-			
 		}else{
-			
-			
-			/*while(found == false){
-				num = RandomNum(v.size());
-				if (board[num] == "*"){
-					board[num] = mark[1];
-					found = true;
-				}
-			}*/
-			return v.elementAt(RandomNum(v.size()));
-			 
+			return v.elementAt(RandomNum(v.size()));	 
 		}
-		
-		
-		
-		
-		
 	}
 	private String aIMark(){
 		return mark[1];
@@ -804,5 +789,9 @@ public class TicTacToe extends JFrame {
 	private String winLoseRatio(int in){
 		String[] say = {"Your Win ratio is: ","Your lose ratio is: ","Your Stale Mate ratio is: "}; 
 		return say[in] + new BigDecimal((Double.parseDouble(getStatString(in)) / (Integer.parseInt(getStatString(0)) + Integer.parseInt(getStatString(1)))) * 100).setScale(2, BigDecimal.ROUND_HALF_UP) + "%";
+	}
+	private void resetStats(){
+		SaveStatString("0,0,0");
+		resetBoard();
 	}
 }
