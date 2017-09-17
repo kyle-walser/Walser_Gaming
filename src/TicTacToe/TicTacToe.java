@@ -520,7 +520,9 @@ public class TicTacToe extends JFrame {
 			for (int i = 0; i < 3 && w == false; i++){// this checks vertically if player has won
 					if (board[1+(i * 1)] == M && board[4+(i * 1)] == M && board[7+(i*1)] == M){
 					w = true;
+					
 					break;
+					
 				}						
 			}
 			for (int i = 0; i < 3 && w == false; i++){ // this checks horizontally if player has won
@@ -544,6 +546,7 @@ public class TicTacToe extends JFrame {
 					
 					JOptionPane.showMessageDialog(null, "Congrats "+ playerName[0] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
 					saveStats(1);
+					break;
 				}else{
 					
 					if (numOfPlayers == 0){
@@ -552,7 +555,13 @@ public class TicTacToe extends JFrame {
 						JOptionPane.showMessageDialog(null,  "Congrats "+ playerName[1] + " you won", "Winner", JOptionPane.INFORMATION_MESSAGE);
 					}
 					saveStats(2);
+					
 				}
+				
+				
+				
+					
+					
 			}
 			if (gameWon == false){	
 				if (playerTurn == false){
@@ -562,6 +571,10 @@ public class TicTacToe extends JFrame {
 				}
 			}
 			break;
+			
+			
+			default:
+				
 		}
 	}
 	
@@ -713,12 +726,13 @@ public class TicTacToe extends JFrame {
 		switch(WoL){
 		case 1:
 			stats[0] = convert(stats[0]);
-
+			break;
 		case 2:
 			stats[1] = convert(stats[1]);
-			
+			break;
 		case 3:
 			stats[2] = convert(stats[2]);
+			break;
 		}
 		
 		
