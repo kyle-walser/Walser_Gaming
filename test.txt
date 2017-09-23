@@ -1,0 +1,99 @@
+Java is a set of graphics and media packages that enables developers to design create test debug and deploy rich client applications that operate consistently across diverse platforms
+Java Applications
+Availability
+Key Features
+What Can I Build with Java
+How Do I Run a Sample Application
+How Do I Run a Sample in an IDE
+How Do I Create a Java Application
+How Do I Deploy a Java Application
+Resources
+See the Java Architecture document to learn about the Java platform architecture and to get a brief description of the Java APIs for media streaming web rendering and user interface styling
+Java Applications
+Written as a Java API Java application code can reference APIs from any Java library For example Java applications can use Java API libraries to access native system capabilities and connect to server-based middleware applications
+The look and feel of Java applications can be customized Cascading Style Sheets  separate appearance and style from implementation so that developers can concentrate on coding Graphic designers can easily customize the appearance and style of the application through the  If you have a web design background or if you would like to separate the user interface UI and the back-end logic then you can develop the presentation aspects of the UI in the ML scripting language and use Java code for the application logic If you prefer to design UIs without writing code then use Java Scene Builder As you design the UI Scene Builder creates ML markup that can be ported to an Integrated Development Environment IDE so that developers can add the business logic
+Availability
+Java 22 and later releases are fully integrated with the Java SE 7 Runtime Environment JRE and the Java Development Kit JDK Because the JDK is available for all major desktop platforms Windows Mac OS X and Linux Java applications compiled to JDK 7 and later also run on all the major desktop platforms The cross-platform compatibility enables a consistent runtime experience for Java applications developers and users Oracle ensures synchronized releases and updates on all platforms and offers an extensive support program for companies that run mission-critical applications
+On the JDK download page you can get a zip file of Java sample applications The sample applications provide many code samples and snippets that show by example how to write Java applications See How Do I Run a Sample Application for more information
+Key Features
+Java 22 and later releases have the following features:
+Java APIs Java is a Java library that consists of classes and interfaces that are written in native Java code The APIs are designed to be a friendly alternative to Java Virtual Machine Java VM languages such as JRuby and Scala
+ML and Scene Builder ML is an XML-based declarative markup language for constructing a Java application user interface A designer can code in ML or use Java Scene Builder to interactively design the graphical user interface GUI Scene Builder generates ML markup that can be ported to an IDE where a developer can add the business logic
+WebView A web component that uses WebKitHTML technology to make it possible to embed web pages within a Java application JavaScript running in WebView can call Java APIs and Java APIs can call JavaScript running in WebView
+Swing interoperability Existing Swing applications can be updated with new Java features such as rich graphics media play back and embedded Web content
+Built-in UI controls and  Java provides all the major UI controls required to develop a full-featured application Components can be skinned with standard Web technologies such as 
+Canvas API The Canvas API enables drawing directly within an area of the Java scene that consists of one graphical element node
+Multitouch Support Java provides support for multitouch operations based on the capabilities of the underlying platform
+Hardware-accelerated graphics pipeline Java graphics are based on the graphics rendering pipeline Prism Java offers smooth graphics that render quickly through Prism when it is used with a supported graphics card or graphics processing unit GPU If a system does not feature one of the recommended GPUs supported by Java then Prism defaults to the Java 2D software stack
+High-performance media engine The media pipeline supports the playback of web multimedia content It provides a stable low-latency media framework that is based on the GStreamer multimedia framework
+Self-contained application deployment model Self-contained application packages have all of the application resources and a private copy of the Java and Java runtimes They are distributed as native installable packages and provide the same installation and launch experience as native applications for that operating system See the Deploying Java Applications document
+What Can I Build with Java
+With Java you can build many types of applications Typically they are network-aware applications that are deployed across multiple platforms and display information in a high-performance modern user interface that features audio video graphics and animation
+Table 1 shows images of a few of the sample Java applications that are included with the Java 22n release
+Table 1 Sample Java Applications
+Sample Application	Description
+Thumbnail version of the Ensemble application snapshot
+Description of the illustration ensemble-smallgif
+Java Ensemble
+Ensemble provides a gallery of samples that demonstrate various Java features such as animation charts and controls You can view the running sample read a description copy the source code and follow links to the API documentation
+Thumbnail version of Sales Dashboard application snapshot
+Description of the illustration data-app-smallgif
+Sales Dashboard DataApp
+DataApp is a client-server application for a fictional global automobile company called Henley Car Sales Automobile sales are simulated on an EJB server using JavaDB and the data is available via Derby and a RESTful web service The client demonstrates a variety of data presentations by using a mix of ML and Java
+Note: The DataApp sample has multiple NetBeans projects and cannot be run without some additional setup The DataAppReadmehtml file and the NetBeans project file are in the src\DataApp directory
+Thumbnail version of the SwingInterop sample application
+Description of the illustration swing-interopgif
+SwingInterop Sample
+This Swing application shows how Swing and Java can be combined It uses Java components to implement a chart and a simple browser A JTable Swing component is used for the table
+How Do I Run a Sample Application
+The steps in this section explain how to download and run the sample applications that are available as a separate download with the Java Platform JDK 7
+Note:
+Before you can run a sample Java application you need to have the Java runtime libraries on your machine Before you proceed with these steps either install the latest version of the JDK 7 or the latest version of the JRE
+To download and run the sample applications:
+Go to the Java SE Downloads page at http://wwworaclecom/technetwork/java/javase/downloads/indexhtml
+Scroll down to locate the JDK 7 and Java Demos and Samples section
+Click the Demos and Samples Download button to go to the downloads page
+On the Java SE Development Kit 7 Downloads page scroll down to the Java Demos and Samples Downloads section
+Download the zip file for the correct operating system and extract the files
+The java-samples-22x directory is created and contains the files for the available samples The NetBeans projects for the samples are in the java-samples-22x\src directory
+Double-click one of the executable files for a sample
+For example to run the Ensemble sample application use any of the following methods:
+To run Ensemble as a stand alone application double-click the Ensemble  jar file
+To run Ensemble in the browser double-click the Ensemble  html file
+To run Ensemble as a Web Start application either double-click the Ensemble jnlp file or double-click the Ensemblehtml file JavaScript code engages the Java Deployment Toolkit to ensure the user environment has the required Java and Java runtimes
+How Do I Run a Sample in an IDE
+You can use several Java development IDEs to develop Java applications The following steps explain how to view and run the source code in the NetBeans IDE
+To view and run the sample source code in NetBeans IDE:
+Download the samples as described above and extract the files
+From a NetBeans 72 or later IDE load the project for the sample you want to view
+From the File menu select Open Project
+In the Open Project dialog box navigate to the directory that lists the samples The navigation path looks something like this:
+\java_samples-2_2_x-<platform>\java-samples-22x\src
+Select the sample you want to view
+Click the Open Project button
+In the Projects window right click the project you just opened and select Run
+Notice the Output window is updated and the sample project is run and deployed
+How Do I Create a Java Application
+Because Java applications are written in the Java language you can use your favorite editor or any integrated development environment IDE that supports the Java language such as NetBeans Eclipse or IntelliJ IDEA to create Java applications
+To create Java applications:
+Go to the Java SE Downloads page at http://wwworaclecom/technetwork/java/javase/downloads/indexhtml to download the Oracle® JDK 7 with Java 22n support Go to the Java Release Documents page for the system requirements and installation instructions for the Java SDK version that you plan to use
+Use the Getting Started with Java tutorial to create simple applications that demonstrates how to work with layouts style sheets and visual effects
+Use Java Scene Builder to design the UI for your Java application without coding You can drag and drop UI components to a work area modify their properties apply style sheets and integrate the resulting code with their application logic
+Download the Java Scene Builder from the Java Downloads page at http://wwworaclecom/technetwork/java/java/downloads/indexhtml
+Follow the Getting Started with Java Scene Builder the tutorial to learn more
+How Do I Deploy a Java Application
+Java applications can be deployed in any of the following execution modes:
+Run as a standalone program The application package is available on a local drive Launch it by using a Java launcher such as java -jar MyAppjar or by double-clicking the application JAR file
+Launch from a remote server with Web Start Click a link in a web page to start the application from a remote web server Once you have downloaded it you can also start a Web Start application from a desktop shortcut
+Embed in a web page Java content is embedded in the web page and hosted on a remote web server
+Launch as a self-contained application The application is installed on the local drive and runs as a standalone program using a private copy of Java and Java runtimes You can launch the application in the same way as other native applications for that operating system for example by using a desktop shortcut or menu entry
+To deploy a Java application:
+Decide which execution mode you want to use to deploy the application
+Read the Deploying Java Application document for detailed instructions
+Resources
+Use the following resources to learn more about the Java technology
+Download the latest JDK 7 release and the Java samples from the Java SE Downloads page at:
+Read the Java Architecture document
+Browse Java tutorials and articles for developers
+Review Java 2 Features the Java FAQ and the Java Road map
+Copyright  2008 2013 Oracle and/or its affiliates All rights reserved 
