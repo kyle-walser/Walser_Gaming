@@ -2,10 +2,17 @@ package hangMan;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Vector;
 
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import javafx.*;
@@ -17,40 +24,38 @@ public class Getlist {
 		System.exit(0);
 	}
 	private static void getList(){
-		Vector<String> List= new Vector<String>();
-		Vector<String> temp = new Vector<String>();
+		Vector<String> List = new Vector<String>();
+		JLabel lblL1 = new JLabel();
+		List = FillVector();
+		
+		JFrame frame = new JFrame("HangMan");
+		frame.setVisible(true);
+	}
+
+	@SuppressWarnings("resource")
+	private static Vector<String> FillVector(){
+		Vector<String> out = new Vector<String>();
 		FileReader fin = null;
-		int o = 0;
 		try {
-			 fin = new FileReader("test.txt");
+			fin = new FileReader("WordList.txt");
+			BufferedReader read = new BufferedReader(fin);
+			String temp = "";
+			temp = read.readLine();
+			do{
+				out.add(temp);
+				temp = read.readLine();
+			} while (temp != null);
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "File Not Found");
-		}
-		BufferedReader in = new BufferedReader(fin);
-		try {
-			temp.add(in.readLine());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (int i = 0; temp.elementAt(i) != null;i++){
-			
-			try {
-				temp.add(in.readLine());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		}
-		for ( int i = 0; i < temp.size() - 1 ;i++)
-		{
-			
-			List = addToFile(List,temp.get(i).split(" "));
-			
-		}
 		
+		System.out.println(out.size());
 		
-			System.out.println(randomWord(List, List.size()));
+		return out;
 		
 	}
 	private static String randomWord(Vector<String> in,int number){
