@@ -42,6 +42,7 @@ public class Getlist {
 			String temp = "";
 			temp = read.readLine();
 			do{
+				System.out.println(temp);
 				out.add(temp);
 				temp = read.readLine();
 			} while (temp != null);
