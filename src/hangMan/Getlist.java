@@ -18,18 +18,21 @@ import javax.swing.JOptionPane;
 import javafx.*;
 
 public class Getlist {
+	static Vector<String> List = new Vector<String>();
 	public static void main(String[] args) {
 		
 		getList();
 		System.exit(0);
 	}
 	private static void getList(){
-		Vector<String> List = new Vector<String>();
-		JLabel lblL1 = new JLabel();
+		
+		
+		
 		List = FillVector();
 		
-		JFrame frame = new JFrame("HangMan");
-		frame.setVisible(true);
+		
+		
+		
 	}
 
 	@SuppressWarnings("resource")
@@ -42,7 +45,7 @@ public class Getlist {
 			String temp = "";
 			temp = read.readLine();
 			do{
-				System.out.println(temp);
+			
 				out.add(temp);
 				temp = read.readLine();
 			} while (temp != null);
@@ -54,8 +57,31 @@ public class Getlist {
 			e.printStackTrace();
 		}
 		
-		System.out.println(out.size());
+		for (int i = 0; i < out.size(); i++){
+			
+			List = addToFile(List,out.elementAt(i).split(" "));	
+		}
+		List.sort(null);
 		
+		for (int i = 1; i < List.size(); i++){
+			
+			if (List.elementAt(i).equals( List.elementAt(i - 1)) == true){
+				List.removeElementAt(i);
+				i = 1;
+			}
+		}
+		
+		try {
+			FileWriter fn = new FileWriter("test.txt");
+			PrintWriter o =  new PrintWriter(fn);
+			for ( int i = 0; i < List.size();i++){
+				o.println(List.elementAt(i));
+			}
+			o.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return out;
 		
 	}
@@ -63,14 +89,28 @@ public class Getlist {
 		return in.elementAt(RandomNum(number));
 	}
 	private static Vector<String> addToFile(Vector<String> in, String[] out){
+		
 		for(String s : out){
-			if (s.length() >= 4 && s.length() <= 9 && s.contains("/") == false && s.contains(":") == false && s.contains("0") == false ){
-				
-					in.add(s.toUpperCase());		
-				
-				 
+			if (s.length() >= 4 && s.length() <= 9){
+			
+					in.add(s.toUpperCase());
 			}
 		   
+		}
+		
+		for (int i = 0; i < in.size(); i++){
+			
+			for (int o = 0; o < in.elementAt(i).length(); o++){
+				if ((in.elementAt(i).charAt(o) < 65 || in.elementAt(i).charAt(o) > 90)){
+
+					o = in.elementAt(i).length();
+					in.remove(i);
+					i--;
+				}
+				
+			}
+			
+			
 		}
 		
 		
