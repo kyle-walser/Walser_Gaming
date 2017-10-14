@@ -19,18 +19,21 @@ import javax.swing.JOptionPane;
 import javafx.*;
 
 public class ListData {
-	private static Vector<String> List = new Vector<String>();
-	private static String wordChoice = new String(); 
-	private static String UserWord = new String();
-	private static Vector<String> UserCorLet = new Vector<String>();
-	private static Vector<String> UserInCorLet = new Vector<String>();
-	public static void Main(String[] args) {
-		setList();
+	protected static Vector<String> List = new Vector<String>();
+	protected static String wordChoice = new String(); 
+	protected static String UserWord = new String();
+	protected static Vector<String> UserCorLet = new Vector<String>();
+	protected static Vector<String> UserInCorLet = new Vector<String>();
+	
+	public static void main(String[] args){
 		
 	}
 
 	@SuppressWarnings("resource")
-	private static void setList(){
+	/*ListData(){
+		setList();
+	}*/
+	protected void setList(){
 		
 		FileReader fin = null;
 		try {
@@ -53,14 +56,29 @@ public class ListData {
 		
 		
 	}
-	private static String randomWord(Vector<String> in,int number){
-		return in.elementAt(RandomNum(number));
+	protected static void SetWord(){
+		 wordChoice = List.elementAt(RandomNum(List.size()));
+	}
+	protected static String GetWord(){
+		return wordChoice;
 	}
 
 	public static int RandomNum(int num){
 		Random rand = new Random();
 		return (rand.nextInt(100) % num);
 		
+	}
+	protected static void addWrongCharList(String in){
+		UserInCorLet.add(in);
+	}
+	protected static int getWrongNumber(){
+		return UserInCorLet.size();
+	}
+	protected static void resetWrongList(){
+		UserInCorLet.clear();
+	}
+	protected static String getListSize(){
+		return Integer.toString(List.size());
 	}
 	
 
