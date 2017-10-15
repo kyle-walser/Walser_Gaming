@@ -12,6 +12,7 @@ import java.util.Vector;
 
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,11 +57,18 @@ public class ListData {
 		
 		
 	}
-	protected static void SetWord(){
-		 wordChoice = List.elementAt(RandomNum(List.size()));
+	protected void SetWord(){
+		 wordChoice = List.elementAt(RandomNum(List.size())).toUpperCase();
 	}
 	protected static String GetWord(){
 		return wordChoice;
+	}
+	protected void checkWord(String in){
+		if (GetWord().contains(in) == true){
+			
+		}else{
+			addWrongCharList(in);
+		}
 	}
 
 	public static int RandomNum(int num){
@@ -77,9 +85,34 @@ public class ListData {
 	protected static void resetWrongList(){
 		UserInCorLet.clear();
 	}
+	protected static void resetRightList(){
+		UserCorLet.clear();
+	}
+	protected static void addRightList(String in){
+		UserCorLet.add(in);
+	}
+	protected void setIniUserWord(){
+		for (int i = 0; i <GetWord().length();i++){
+			
+		}
+	}
+	protected static String replaceChar(String in){
+		
+		char[] myNameChars = in.toCharArray();
+		myNameChars[4] = 'x';
+		return String.valueOf(myNameChars);
+	}
 	protected static String getListSize(){
 		return Integer.toString(List.size());
 	}
+	protected static void setUserWord(String in){
+		UserWord = in;
+	}
+	protected static String getUserWord(){
+		return UserWord;
+	}
+	
+	
 	
 
 }
