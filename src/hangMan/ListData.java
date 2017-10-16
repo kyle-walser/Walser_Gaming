@@ -43,7 +43,6 @@ public class ListData {
 			String temp = "";
 			temp = read.readLine();
 			do{
-			
 				List.add(temp);
 				temp = read.readLine();
 			} while (temp != null);
@@ -60,12 +59,17 @@ public class ListData {
 	protected void SetWord(){
 		 wordChoice = List.elementAt(RandomNum(List.size())).toUpperCase();
 	}
-	protected static String GetWord(){
+	protected String GetWord(){
 		return wordChoice;
 	}
+	
 	protected void checkWord(String in){
 		if (GetWord().contains(in) == true){
-			
+			for (int i = 0; i < GetWord().length();i++){
+				if (in.charAt(0) == GetWord().charAt(i)){
+					replaceChar(getUserWord(), i, getCharUserChoice());
+				}
+			}
 		}else{
 			addWrongCharList(in);
 		}
@@ -75,6 +79,9 @@ public class ListData {
 		Random rand = new Random();
 		return (rand.nextInt(100) % num);
 		
+	}
+	protected String getCharUserChoice(){
+		return  UserCorLet.lastElement();
 	}
 	protected static void addWrongCharList(String in){
 		UserInCorLet.add(in);
@@ -91,15 +98,18 @@ public class ListData {
 	protected static void addRightList(String in){
 		UserCorLet.add(in);
 	}
+	protected static String getCharItem(int in){
+		return UserCorLet.elementAt(in);
+	}
 	protected void setIniUserWord(){
-		for (int i = 0; i <GetWord().length();i++){
-			
+		for (int i = 0; i < GetWord().length();i++){
+			setUserWord(getUserWord() + "*");
 		}
 	}
-	protected static String replaceChar(String in){
-		
+	protected static String replaceChar(String in, int x, String c){
+		char ch = c.charAt(0);
 		char[] myNameChars = in.toCharArray();
-		myNameChars[4] = 'x';
+		myNameChars[x] = ch;
 		return String.valueOf(myNameChars);
 	}
 	protected static String getListSize(){
@@ -108,8 +118,11 @@ public class ListData {
 	protected static void setUserWord(String in){
 		UserWord = in;
 	}
-	protected static String getUserWord(){
+	protected String getUserWord(){
 		return UserWord;
+	}
+	protected static void resetUserWord(){
+		UserWord = "";
 	}
 	
 	
