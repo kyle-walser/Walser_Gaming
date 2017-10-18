@@ -56,6 +56,22 @@ public class ListData {
 		
 		
 	}
+	protected boolean checkRightList(String in){
+		for (int i = 0; i < UserCorLet.size(); i++){
+			if (in == UserCorLet.elementAt(i) ){
+				return true;
+			}
+		}
+		return false;
+	}
+	protected boolean checkWrongList(String in){
+		for (int i = 0; i < UserInCorLet.size(); i++){
+			if (in == UserInCorLet.elementAt(i) ){
+				return true;
+			}
+		}
+		return false;
+	}
 	protected void SetWord(){
 		 wordChoice = List.elementAt(RandomNum(List.size())).toUpperCase();
 	}
@@ -65,9 +81,10 @@ public class ListData {
 	
 	protected void checkWord(String in){
 		if (GetWord().contains(in) == true){
+			
 			for (int i = 0; i < GetWord().length();i++){
 				if (in.charAt(0) == GetWord().charAt(i)){
-					replaceChar(getUserWord(), i, getCharUserChoice());
+					setUserWord(replaceChar(getUserWord(), i, in));
 				}
 			}
 		}else{
@@ -81,12 +98,12 @@ public class ListData {
 		
 	}
 	protected String getCharUserChoice(){
-		return  UserCorLet.lastElement();
+		return  UserCorLet.elementAt(UserCorLet.size());
 	}
 	protected static void addWrongCharList(String in){
 		UserInCorLet.add(in);
 	}
-	protected static int getWrongNumber(){
+	protected int getWrongNumber(){
 		return UserInCorLet.size();
 	}
 	protected static void resetWrongList(){
@@ -95,7 +112,7 @@ public class ListData {
 	protected static void resetRightList(){
 		UserCorLet.clear();
 	}
-	protected static void addRightList(String in){
+	protected void addRightList(String in){
 		UserCorLet.add(in);
 	}
 	protected static String getCharItem(int in){
@@ -106,7 +123,15 @@ public class ListData {
 			setUserWord(getUserWord() + "*");
 		}
 	}
+	protected boolean checkUserWin(){
+		if (getUserWord().contains("*") == true){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	protected static String replaceChar(String in, int x, String c){
+		
 		char ch = c.charAt(0);
 		char[] myNameChars = in.toCharArray();
 		myNameChars[x] = ch;
