@@ -149,6 +149,15 @@ public class ListData {
 	protected static void resetUserWord(){
 		UserWord = "";
 	}
+	protected void resetGame(){
+		resetUserWord();
+		SetWord();
+		setIniUserWord();
+		resetRightList();
+		
+		resetWrongList();
+		
+	}
 	
 	
 	

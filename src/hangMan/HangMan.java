@@ -29,8 +29,8 @@ import java.awt.event.KeyEvent;
 public class HangMan extends JFrame {
 
 	private JPanel contentPane;
-	ListData list = new ListData();
-	private JTextField txtword;
+	static ListData list = new ListData();
+	private static JTextField txtword;
 	static JLabel lbl_0 = new JLabel("_____________________________________________");
 	static JLabel lbl1 = new JLabel("|");
 	static JLabel label_1 = new JLabel("|");
@@ -86,6 +86,13 @@ public class HangMan extends JFrame {
 		mnFile.add(mntmNew);
 		
 		JMenuItem mntmGiveUp = new JMenuItem("Give Up");
+		mntmGiveUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "Are you sure you want to give up?", "Giving up?", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION) ==0){
+					txtword.setText(list.GetWord());
+				}
+			}
+		});
 		mnFile.add(mntmGiveUp);
 		
 		JMenuItem mntmBack = new JMenuItem("Back");
@@ -128,7 +135,7 @@ public class HangMan extends JFrame {
 		txtword.setEditable(false);
 		txtword.setHorizontalAlignment(SwingConstants.CENTER);
 		txtword.setBounds(62, 258, 280, 71);
-		txtword.setText(list.getUserWord()); // here is where i changed the code
+		txtword.setText(list.getUserWord() + " + " + list.GetWord()); // here is where i changed the code
 		contentPane.add(txtword);
 		txtword.setColumns(10);
 		
@@ -179,24 +186,8 @@ public class HangMan extends JFrame {
 		contentPane.add(label_6);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				runAction();
 				
-				if (t.getText().length() == 1){
-					if (list.checkRightList(t.getText().toUpperCase()) == false){
-						list.addRightList(t.getText().toUpperCase());
-						list.checkWord(t.getText().toUpperCase());
-						switchOut(list.getWrongNumber());
-						t.setText("");
-						txtword.setText(list.getUserWord());
-					}else{
-						JOptionPane.showMessageDialog(null, "You have already submitted a " + t.getText().toUpperCase() + " /n Please select a different letter", "Duplicate character selected error", JOptionPane.ERROR_MESSAGE);
-						t.requestFocus();
-						t.setText("");
-					}
-				}else{
-					JOptionPane.showMessageDialog(null, "You must enter one character.","Too Many Characters Error", JOptionPane.ERROR_MESSAGE);
-					t.requestFocus();
-					t.setText("");
-				}
 			}
 		});
 		btnSubmit.setBounds(258, 340, 89, 23);
@@ -204,6 +195,14 @@ public class HangMan extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		t = new JTextField();
+		t.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					runAction();
+		        }//here
+			}
+		});
 	/*	t.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -232,57 +231,111 @@ public class HangMan extends JFrame {
 		contentPane.add(label_7);
 		
 	}
+	private static void runAction(){
+		if (t.getText().length() == 1){
+			if (list.checkRightList(t.getText().toUpperCase()) == false){
+				list.addRightList(t.getText().toUpperCase());
+				list.checkWord(t.getText().toUpperCase());
+				switchOut(list.getWrongNumber());
+				t.setText("");
+				t.requestFocus();
+				txtword.setText(list.getUserWord());
+			}else{
+				JOptionPane.showMessageDialog(null, "You have already submitted a " + t.getText().toUpperCase() + " /n Please select a different letter", "Duplicate character selected error", JOptionPane.ERROR_MESSAGE);
+				t.requestFocus();
+				t.setText("");
+			}
+		}else{
+			JOptionPane.showMessageDialog(null, "You must enter one character.","Too Many Characters Error", JOptionPane.ERROR_MESSAGE);
+			t.requestFocus();
+			t.setText("");
+		}
+	}
 	private static void switchOut(int i){
 		
-		switch(i){
-		case 1: 
-			lbl_0.setVisible(true);
+		if (list.checkUserWin() == false){
+			switch(i){
+			case 1: 
+				lbl_0.setVisible(true);
+				
+				break;
+			case 2: 
+				lbl1.setVisible(true);
+				label_1.setVisible(true);
+				break;
+			case 3:
+				label_2.setVisible(true);
+				break;
+			case 4:
+				lblO.setVisible(true);
+				break;
+			case 5: 
+				label_3.setVisible(true);
+				break;
+			case 6:
+				label_4.setVisible(true);
+				break;
+			case 7:
+				label_5.setVisible(true);
+				break;
+			case 8:
+				label_6.setVisible(true);
+				break;
+			case 9:
+				
+				label_7.setVisible(true);
 			
-			break;
-		case 2: 
-			lbl1.setVisible(true);
-			label_1.setVisible(true);
-			break;
-		case 3:
-			label_2.setVisible(true);
-			break;
-		case 4:
-			lblO.setVisible(true);
-			break;
-		case 5: 
-			label_3.setVisible(true);
-			break;
-		case 6:
-			label_4.setVisible(true);
-			break;
-		case 7:
-			label_5.setVisible(true);
-			break;
-		case 8:
-			label_6.setVisible(true);
-			break;
-		case 9:
+				break;
+			case 10:
+				
+				t.setEnabled(false);
+				lblO.setForeground(Color.RED);
+				label_3.setForeground(Color.RED);
+				label_4.setForeground(Color.RED);
+				label_5.setForeground(Color.RED);
+				label_6.setForeground(Color.RED);
+				label_7.setForeground(Color.RED);
+				break;
+			default:
+				if (i != 0 || list.checkUserWin() == true){
+				
+				
+				}
+				break;
+			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Congradulation, You win.", "Congrats", JOptionPane.INFORMATION_MESSAGE);
+			if (JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Play Again?", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,null) == 0){
+				resetGame();
+			}
 			
-			label_7.setVisible(true);
-		
-			break;
-		case 10:
-			t.setEnabled(false);
-			label_7.setBackground(Color.RED);
-		default:
-			boolean d = false;
-			lbl_0.setVisible(d);
-			lbl1.setVisible(d);
-			label_1.setVisible(d);
-			label_2.setVisible(d);
-			lblO.setVisible(d);
-			label_3.setVisible(d);
-			label_4.setVisible(d);
-			label_5.setVisible(d);
-			label_6.setVisible(d);
-			label_7.setVisible(d);
-			break;
 		}
+		
+	}
+	private static void resetGame(){
+		boolean d = false;
+		t.setEnabled(true);
+		lbl_0.setVisible(d);
+		lbl1.setVisible(d);
+		label_1.setVisible(d);
+		label_2.setVisible(d);
+		lblO.setVisible(d);
+		label_3.setVisible(d);
+		label_4.setVisible(d);
+		label_5.setVisible(d);
+		label_6.setVisible(d);
+		label_7.setVisible(d);
+		t.setEnabled(true);
+		lblO.setForeground(Color.BLACK);
+		label_3.setForeground(Color.BLACK);
+		label_4.setForeground(Color.BLACK);
+		label_5.setForeground(Color.BLACK);
+		label_6.setForeground(Color.BLACK);
+		label_7.setForeground(Color.BLACK);
+		list.resetGame();
+		txtword.setText(list.getUserWord());
+		
+		
 		
 	}
 }
