@@ -83,17 +83,12 @@ public class HangMan extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmNew = new JMenuItem("New");
-		mnFile.add(mntmNew);
-		
-		JMenuItem mntmGiveUp = new JMenuItem("Give Up");
-		mntmGiveUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "Are you sure you want to give up?", "Giving up?", JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_OPTION) ==0){
-					txtword.setText(list.GetWord());
-				}
+		mntmNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				resetGame();
 			}
 		});
-		mnFile.add(mntmGiveUp);
+		mnFile.add(mntmNew);
 		
 		JMenuItem mntmBack = new JMenuItem("Back");
 		mnFile.add(mntmBack);
@@ -135,7 +130,7 @@ public class HangMan extends JFrame {
 		txtword.setEditable(false);
 		txtword.setHorizontalAlignment(SwingConstants.CENTER);
 		txtword.setBounds(62, 258, 280, 71);
-		txtword.setText(list.getUserWord() + " + " + list.GetWord()); // here is where i changed the code
+		txtword.setText(list.getUserWord()); // here is where i changed the code
 		contentPane.add(txtword);
 		txtword.setColumns(10);
 		
@@ -232,16 +227,23 @@ public class HangMan extends JFrame {
 		
 	}
 	private static void runAction(){
+		
 		if (t.getText().length() == 1){
-			if (list.checkRightList(t.getText().toUpperCase()) == false){
-				list.addRightList(t.getText().toUpperCase());
-				list.checkWord(t.getText().toUpperCase());
-				switchOut(list.getWrongNumber());
-				t.setText("");
-				t.requestFocus();
-				txtword.setText(list.getUserWord());
+			if (Integer.parseInt(t.getText().toUpperCase()) < 90 &&Integer.parseInt(t.getText().toUpperCase()) > 65 ){
+				if (list.checkRightList(t.getText().toUpperCase()) == false){
+					list.addRightList(t.getText().toUpperCase());
+					list.checkWord(t.getText().toUpperCase());
+					switchOut(list.getWrongNumber());
+					t.setText("");
+					t.requestFocus();
+					txtword.setText(list.getUserWord());
+				}else{
+					JOptionPane.showMessageDialog(null, "You have already submitted a " + t.getText().toUpperCase() + " /n Please select a different letter", "Duplicate character selected error", JOptionPane.ERROR_MESSAGE);
+					t.requestFocus();
+					t.setText("");
+				}
 			}else{
-				JOptionPane.showMessageDialog(null, "You have already submitted a " + t.getText().toUpperCase() + " /n Please select a different letter", "Duplicate character selected error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "This is not a letter of the alphabet \n Please try again","Invalid Character Error", JOptionPane.ERROR_MESSAGE);
 				t.requestFocus();
 				t.setText("");
 			}

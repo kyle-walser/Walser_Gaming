@@ -154,7 +154,6 @@ public class ListData {
 		SetWord();
 		setIniUserWord();
 		resetRightList();
-		
 		resetWrongList();
 		
 	}
