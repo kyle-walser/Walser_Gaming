@@ -229,7 +229,8 @@ public class HangMan extends JFrame {
 	private static void runAction(){
 		
 		if (t.getText().length() == 1){
-			if (Integer.parseInt(t.getText().toUpperCase()) < 90 &&Integer.parseInt(t.getText().toUpperCase()) > 65 ){
+		//	System.out.println(t.getText().toUpperCase());
+		if ((int)t.getText().toUpperCase().charAt(0) < 90 && (int)t.getText().toUpperCase().charAt(0)  > 65 ){
 				if (list.checkRightList(t.getText().toUpperCase()) == false){
 					list.addRightList(t.getText().toUpperCase());
 					list.checkWord(t.getText().toUpperCase());
