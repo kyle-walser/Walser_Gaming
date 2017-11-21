@@ -58,6 +58,7 @@ public class ListData {
 	}
 	protected boolean checkRightList(String in){
 		for (int i = 0; i < UserCorLet.size(); i++){
+			System.out.println(in + "  "  + UserCorLet.elementAt(i));
 			if (in == UserCorLet.elementAt(i) ){
 				return true;
 			}
@@ -79,7 +80,7 @@ public class ListData {
 		return wordChoice;
 	}
 	
-	protected void checkWord(String in){
+	protected boolean checkWord(String in){
 		if (GetWord().contains(in) == true){
 			
 			for (int i = 0; i < GetWord().length();i++){
@@ -87,8 +88,11 @@ public class ListData {
 					setUserWord(replaceChar(getUserWord(), i, in));
 				}
 			}
+			return true;
 		}else{
-			addWrongCharList(in);
+			//addWrongCharList(in);
+			return false;
+			
 		}
 	}
 
