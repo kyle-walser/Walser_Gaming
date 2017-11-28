@@ -18,7 +18,7 @@ public class BattleShipGame extends JFrame {
 	public static void main(String[] args) {
 		Player_data Player = new Player_data();
 		Player.setBoard();
-		Player.print();
+		Player.print(Player.getMiss());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
