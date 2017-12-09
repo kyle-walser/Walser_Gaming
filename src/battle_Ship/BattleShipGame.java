@@ -19,7 +19,7 @@ public class BattleShipGame extends JFrame {
 		Player_data Player = new Player_data();
 		Player.setBoard();
 		Player.setShipInfo();
-		System.out.println(Player.getDirection());
+		System.out.println((int)'B');
 		//Player.print(Player.getMiss());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,6 +31,9 @@ public class BattleShipGame extends JFrame {
 				}
 			}
 		});
+	}
+	public static int Menu(Player_data p1,Player_data p2){
+		
 	}
 
 	/**

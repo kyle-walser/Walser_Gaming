@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 public class Player_data{
 	private String Name;
+	private int CharID;
 	private char[][] MandH = new char[10][10];
 	private static char[][] Ships_Location = new char[10][10];
 	private boolean turn;
@@ -40,7 +41,7 @@ public class Player_data{
 			return true;
 		}
 	}
-	public void comShipPlacement(){
+	public void ShipPlacement(){
 		int x,y,d = 0;
 		for(int i = 0; i < Ship_Size.size(); i++)
 		{
@@ -54,7 +55,7 @@ public class Player_data{
 			}
 		}
 	}
-	private static void setComShip(int x,int y,int d,int s, char c ){
+	private static void setShip(int x,int y,int d,int s, char c ){
 		switch(d){
 		case 0:
 			for(int o = 0; o < s; o++ ){
