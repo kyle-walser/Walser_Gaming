@@ -14,7 +14,7 @@ public class Player_data{
 	private static Vector<String> Ship_Desc = new Vector<String>();
 	private static Vector<Integer> Ship_Size = new Vector<Integer>();
 	private static Vector<Character> Ship_Char = new Vector<Character>();
-	public char[][] MandH(){
+	public char[][] getMandH(){
 		return MandH;
 	}
 	
@@ -41,6 +41,7 @@ public class Player_data{
 			return true;
 		}
 	}
+	
 	public void ShipPlacement(){
 		int x,y,d = 0;
 		for(int i = 0; i < Ship_Size.size(); i++)
@@ -196,14 +197,18 @@ public class Player_data{
 	public void setshplc(int y,int x , char z){
 		Ships_Location[x][y] = z;
 	}
-	public void print(char h[][]){
+	public String print(char h[][]){
+		String s = "  A B C D E F G H I J\n";
+		  // s = s + "  |-------------------\n";
 		
 		for (int x = 0; x < 10; x++ ){
+			s+=Integer.toString(x + 1);
 			for (int y = 0; y < 10; y++){
-				System.out.print(h[x][y]);
+				s+= "  " + Character.toString(h[x][y]) ;
 			}
-			System.out.println();
+			s+="\n";
 		}
+		return s;
 	}
 	
 	
