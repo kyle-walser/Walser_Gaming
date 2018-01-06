@@ -21,6 +21,12 @@ public class Player_data{
 	public char[][] getShipLoca(){
 		return Ships_Location;
 	}
+	private void setCharID(int in){
+		CharID = in;
+	}
+	private int getCharID(){
+		return CharID;
+	}
 	public Player_data ComShipGuess(Player_data play){
 		int x,y;
 		do{
@@ -198,13 +204,12 @@ public class Player_data{
 		Ships_Location[x][y] = z;
 	}
 	public String print(char h[][]){
-		String s = "  A B C D E F G H I J\n";
-		  // s = s + "  |-------------------\n";
+		String s = "";
+		
 		
 		for (int x = 0; x < 10; x++ ){
-			s+=Integer.toString(x + 1);
-			for (int y = 0; y < 10; y++){
-				s+= "  " + Character.toString(h[x][y]) ;
+					for (int y = 0; y < 10; y++){
+				s+= "   " + Character.toString(h[x][y]) ;
 			}
 			s+="\n";
 		}
