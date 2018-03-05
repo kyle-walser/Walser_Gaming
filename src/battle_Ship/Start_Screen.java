@@ -54,11 +54,14 @@ public class Start_Screen extends JFrame {
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				BattleShipGame game = new BattleShipGame();
+				game.setVisible(true);
 				dispose();
 			}
 		});
 		btnEnter.setBounds(134, 137, 166, 50);
 		contentPane.add(btnEnter);
-		requestFocus();
+	
 	}
+	
 }
