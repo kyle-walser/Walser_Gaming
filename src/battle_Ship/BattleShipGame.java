@@ -57,6 +57,7 @@ public class BattleShipGame extends JFrame {
 		
 		Player.setBoard();
 		Player.setShipInfo();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 506, 563);
 		
@@ -109,19 +110,19 @@ public class BattleShipGame extends JFrame {
 		contentPane.add(lblA);
 		
 		JLabel lblB = new JLabel("B");
-		lblB.setBounds(23, 100, 16, 14);
+		lblB.setBounds(23, 99, 16, 14);
 		contentPane.add(lblB);
 		
 		JLabel lblC = new JLabel("C");
-		lblC.setBounds(23, 125, 16, 14);
+		lblC.setBounds(23, 123, 16, 14);
 		contentPane.add(lblC);
 		
 		JLabel lblD = new JLabel("D");
-		lblD.setBounds(23, 150, 16, 14);
+		lblD.setBounds(23, 147, 16, 14);
 		contentPane.add(lblD);
 		
 		JLabel lblE = new JLabel("E");
-		lblE.setBounds(23, 175, 16, 14);
+		lblE.setBounds(23, 171, 16, 14);
 		contentPane.add(lblE);
 		
 		
